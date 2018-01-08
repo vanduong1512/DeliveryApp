@@ -14,6 +14,10 @@ class NewsScreen extends Component {
                 <Text>To place: {this.props.toPlace}</Text>
                 <Text>From time: {this.props.fromTime}</Text>
                 <Text>To Time: {this.props.toTime}</Text>
+                <Text>Transportation Costs: {this.props.transportationCosts}</Text>
+                <Text>Bail: {this.props.bail}</Text>
+                <Text>Describe: {this.props.describe}</Text>
+                <Text>Size: {this.props.size}</Text>
             </View>
         );
     }

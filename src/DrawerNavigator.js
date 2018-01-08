@@ -6,6 +6,7 @@ import { DrawerNavigator } from 'react-navigation';
 import HomeDrawer from './screens/HomeScreen';
 import LeftPanel from './component/LeftPanel';
 import NewsDeliveryDrawer from './screens/NewsDelivery';
+import MyOrder from './screens/MyOrder';
 import { Text } from 'react-native';
 
 const DrawerNavigation = DrawerNavigator({
@@ -38,7 +39,21 @@ const DrawerNavigation = DrawerNavigator({
             ),
         })
     },
-    LeftPanel: { screen: LeftPanel },
+    MyOrder: {
+        screen: MyOrder,
+        navigationOptions: ({ navigation }) => ({
+            title: 'My Order',
+            drawerLabel: 'News Delivery',
+            headerLeft: (
+                <TouchableOpacity
+                    style={{ margin: 10 }}
+                    onPress={() => navigation.navigate('DrawerOpen')}
+                >
+                    <Icon name="bars" size={30} />
+                </TouchableOpacity>
+            ),
+        })
+    },
 });
 
 export default DrawerNavigation;

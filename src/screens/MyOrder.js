@@ -1,15 +1,27 @@
 import React, { Component } from 'react';
 import { View, Text, TouchableHighlight, FlatList, StyleSheet } from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
-class DescribeNewsDelivery extends Component {
+class ListMyOrder extends Component {
     render() {
+        var data = [{ key: 1, nameUserOrder: 'van a', orderDate: '1/1/1110', deliveryDate: '1/1/1111', fromPlace: 'a', toPlace: 'b', fromTime: '2:30', toTime: '12:30' },
+        { key: 2, nameUserOrder: 'van b', orderDate: '2/2/2220', deliveryDate: '2/2/2222', fromPlace: 'b', toPlace: 'c', fromTime: '2:30', toTime: '12:30' },
+        { key: 3, nameUserOrder: 'van c', orderDate: '3/3/3330', deliveryDate: '3/3/3333', fromPlace: 'c', toPlace: 'd', fromTime: '2:30', toTime: '12:30' },];
         return (
             <FlatList
                 style={styles.container}
-                data={this.props.parent.data}
+                data={data}
                 renderItem={({ item }) =>
                     <View style={styles.container2}>
-                        <Text style={styles.textNameUser}>Order User: {item.nameUserOrder}</Text>
+                        <View style={styles.headerOrder}>
+                            <TouchableHighlight style={styles.btnReadMore}>
+                                <Text style={styles.textReadMore}>X</Text>
+                            </TouchableHighlight>
+                            <TouchableHighlight style={styles.btnEdit}>
+                                <Icon style={{ color:'white', justifyContent: 'center' }} name='edit' size={30}/>
+                            </TouchableHighlight>
+                        </View>
+                        <Text style={styles.textNameUser}>Product Name: {item.productName}</Text>
                         <View style={styles.containerDateTime}>
                             <Text style={styles.textDate}>Order date: {item.orderDate}</Text>
                             <Text style={styles.textDate}>Delivery date: {item.deliveryDate}</Text>
@@ -22,9 +34,6 @@ class DescribeNewsDelivery extends Component {
                             <Text style={styles.textTime}>From: {item.fromTime}</Text>
                             <Text style={styles.textTime}>To: {item.toTime}</Text>
                         </View>
-                        <TouchableHighlight style={styles.btnReadMore} onPress={this.props.parent.readMore()}>
-                            <Text style={styles.textReadMore}>Read more</Text>
-                        </TouchableHighlight>
                     </View>
                 }
             />
@@ -51,14 +60,14 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
     },
     textTime: {
-        fontSize: 15,
+        fontSize: 18,
         width: 150,
     },
     textDate: {
-        fontSize: 15,        
+        fontSize: 18,
     },
     textPlace: {
-        fontSize: 15
+        fontSize: 18
     },
     title: {
         fontSize: 20,
@@ -66,10 +75,19 @@ const styles = StyleSheet.create({
     },
     btnReadMore: {
         backgroundColor: '#A21E1A',
-        width: 100,
+        width: 40,
         height: 50,
         marginTop: 15,
-        marginBottom: 15,
+        marginRight: 15,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    btnEdit: {
+        backgroundColor: '#80D436',
+        width: 40,
+        height: 50,
+        marginTop: 15,
+        marginRight: 15,
         alignItems: 'center',
         justifyContent: 'center',
     },
@@ -78,6 +96,12 @@ const styles = StyleSheet.create({
         color: 'white',
         fontWeight: 'bold',
     },
+    headerOrder: {
+        flex: 1,
+        marginLeft: 15,
+        justifyContent: 'flex-start',
+        flexDirection: 'row',
+    }
 });
 
-export default DescribeNewsDelivery;
+export default ListMyOrder;
