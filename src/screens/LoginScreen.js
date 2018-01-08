@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 
-import { View, Text, TextInput, TouchableOpacity } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity,Button } from 'react-native';
 
 import { StackNavigator, NavigationActions } from 'react-navigation';
+import { userService } from '../API/userService';
+import {connect} from 'react-redux';
 
 class LoginScreen extends Component {
     static navigationOptions = {
@@ -21,21 +23,32 @@ class LoginScreen extends Component {
     }
 
     _onSubmit() {
-        this.props.navigation.navigate('HomeScreen');
-
-        const resetAction = NavigationActions.reset({
-            index: 0,
-            actions: [
-                NavigationActions.navigate({ routeName: 'HomeScreen' }),
-            ]
-        })
-        this.props.navigation.dispatch(resetAction)
+        userService.login(this.state.userName,this.state.passWord).then(user=>{
+            {
+                if(user)
+                {
+                    var {dispatch}=this.props;
+                    dispatch({type:'user_login_success',user:user});
+                    this.props.navigation.navigate('HomeScreen');
+                    const resetAction = NavigationActions.reset({
+                        index: 0,
+                        actions: [
+                            NavigationActions.navigate({ routeName: 'HomeScreen' }),
+                        ]
+                    })
+                    this.props.navigation.dispatch(resetAction)
+                }
+                
+            }
+        }
+        );
+        
+        
     }
 
     render() {
         return (
             <View>
-                <Text>This is login screen</Text>
                 <TextInput
                     placeholder='User Name'
                     onChangeText={(userName) => this.setState({ userName })}
@@ -46,11 +59,21 @@ class LoginScreen extends Component {
                     secureTextEntry={true}
                 />
                 <TouchableOpacity>
-                    <Text onPress={this.onSubmit}>Submit</Text>
+                    <Button onPress={this.onSubmit} title="Login"
+                            color="#841584"
+                            accessibilityLabel="Login"/>
                 </TouchableOpacity>
             </View>
+            
         );
     };
 }
+function mapStateToProps(state) {
+    const  user  = state.user;
+    return {
+        user
+    };
+}
 
-export default LoginScreen;
+const LoginPage = connect(mapStateToProps)(LoginScreen);
+export default  LoginPage  ;

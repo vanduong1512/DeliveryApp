@@ -1,9 +1,15 @@
 import { createStore } from 'redux';
 
-const defaultState = [];
+
+const defaultState = {user:''};
 
 const reducer = (state = defaultState, action) => {
-    return state;
+    switch (action.type) {
+        case 'user_login_success':
+          return {...state,user:action.user}
+        default:
+          return state
+      }
 }
 
 export default store = createStore(reducer);
