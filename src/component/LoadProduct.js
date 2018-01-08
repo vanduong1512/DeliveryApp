@@ -8,11 +8,9 @@ class LoadProduct extends Component {
 
     render() {
         return (
-            <TouchableHighlight
-                onPress={() => alert('popup form')}
-            >
+            <TouchableHighlight onPress={() => this.props.objParent.navigate(this.props.objParent.products.navigation)}>
                 <Image
-                    source={this.props.path}
+                    source={this.props.objParent.products.path}
                 />
             </TouchableHighlight>
         );

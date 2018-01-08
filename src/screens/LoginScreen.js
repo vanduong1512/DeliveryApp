@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import { View, Text, TextInput, TouchableOpacity } from 'react-native';
 
-import { StackNavigator, NavigationActions } from 'react-navigation';
+import { StackNavigator, NavigationActions, } from 'react-navigation';
 
 class LoginScreen extends Component {
     static navigationOptions = {
