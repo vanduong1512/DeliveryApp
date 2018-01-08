@@ -1,5 +1,5 @@
 export const config = {
-    apiUrl: 'http://10.247.78.138:59066'
+    apiUrl: 'http://192.168.100.12:59066'
 };
 export function authHeader() {
     // return authorization header with jwt token

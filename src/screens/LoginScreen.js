@@ -20,8 +20,12 @@ class LoginScreen extends Component {
         };
 
         this.onSubmit = this._onSubmit.bind(this);
+        this.onRegister=this._onRegister.bind(this);
     }
-
+    _onRegister()
+    {
+        this.props.navigation.navigate('RegisterScreen');
+    }
     _onSubmit() {
         userService.login(this.state.userName,this.state.passWord).then(user=>{
             {
@@ -62,6 +66,11 @@ class LoginScreen extends Component {
                     <Button onPress={this.onSubmit} title="Login"
                             color="#841584"
                             accessibilityLabel="Login"/>
+                </TouchableOpacity>
+                <TouchableOpacity>
+                    <Button onPress={this.onRegister} title="Register"
+                            color="#541583"
+                            accessibilityLabel="Register"/>
                 </TouchableOpacity>
             </View>
             

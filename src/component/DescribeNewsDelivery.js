@@ -10,7 +10,7 @@ class DescribeNewsDelivery extends Component {
                 renderItem={({ item }) =>
                     <View style={styles.container2}>
                         <Text>Order User: {item.nameUserOrder}</Text>
-                        <Text>Product's Name: {item.nameProduct}</Text>
+                       
                         <Text>Order date: {item.orderDate}</Text>
                         <Text>Delivery date: {item.deliveryDate}</Text>
                         <Text>Place:</Text>

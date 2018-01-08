@@ -1,7 +1,8 @@
 import  {authHeader, config } from '../ultilities/config';
 
 export const orderService = {
-    create
+    create,
+    getOrder
 };
 function create(data)
 {
@@ -12,6 +13,15 @@ function create(data)
     };
 
     return fetch(config.apiUrl + '/api/Orders', requestOptions).then(handleResponse, handleError);
+}
+function getOrder()
+{
+    const requestOptions = {
+        method: 'GET'
+    };
+
+    return fetch(config.apiUrl + '/api/Orders', requestOptions).then(handleResponse, handleError);
+
 }
 function handleResponse(response) {
     return new Promise((resolve, reject) => {
