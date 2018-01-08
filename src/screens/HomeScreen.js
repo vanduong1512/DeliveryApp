@@ -18,16 +18,6 @@ class HomeScreen extends Component {
     render() {
         var { navigate } = this.props.navigation;
         return (
-<<<<<<< HEAD
-            <View>
-                <View>
-                    <Text>{this.props.user.fullName}</Text>
-                    {
-                        LoadProductIcon.map(e => {
-                            return <LoadProduct path={e.path} key={e.key} />
-                        })
-                    }
-=======
             <View style={styles.container}>
                 <View style={styles.containerProduct}>
                     <ScrollView>
@@ -39,22 +29,11 @@ class HomeScreen extends Component {
                             }
                         </List>
                     </ScrollView>
->>>>>>> 9e621e25f697fb7d4b82a93317cc2ead9402f4fa
                 </View>
             </View>
         );
     };
 }
-<<<<<<< HEAD
-function mapStateToProps(state) {
-    const  user  = state.user;
-    return {
-        user
-    };
-}
-const HomePage = connect(mapStateToProps)(HomeScreen);
-export default HomePage;
-=======
 
 const styles = StyleSheet.create({
     container: {
@@ -69,4 +48,3 @@ const styles = StyleSheet.create({
 });
 
 export default HomeScreen;
->>>>>>> 9e621e25f697fb7d4b82a93317cc2ead9402f4fa

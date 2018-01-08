@@ -2,13 +2,9 @@ import React, { Component } from 'react';
 
 import { View, Text, TextInput, TouchableOpacity,Button } from 'react-native';
 
-<<<<<<< HEAD
 import { StackNavigator, NavigationActions } from 'react-navigation';
 import { userService } from '../API/userService';
 import {connect} from 'react-redux';
-=======
-import { StackNavigator, NavigationActions, } from 'react-navigation';
->>>>>>> 9e621e25f697fb7d4b82a93317cc2ead9402f4fa
 
 class LoginScreen extends Component {
     static navigationOptions = {

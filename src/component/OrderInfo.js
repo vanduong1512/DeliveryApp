@@ -11,19 +11,20 @@ class OrderInfo extends Component {
 
         this.state = {
             orderDate: today.getDate() + "/" + parseInt(today.getMonth() + 1) + "/" + today.getFullYear(),
-            isOrderDateTimePickerVisible: false,
             deliveryDate: today.getDate() + "/" + parseInt(today.getMonth() + 1) + "/" + today.getFullYear(),
-            isDeliveryDateTimePickerVisible: false,
             fromPlace: '',
             toPlace: '',
             fromTime: '00:00',
-            isFromTimePickerVisible: false,
             toTime: '00:00',
-            isToTimePickerVisible: false,
             transportationCosts: 0,
-            isBail: false,
             bail: 0,
             decribe: '',
+
+            isOrderDateTimePickerVisible: false,
+            isBail: false,
+            isToTimePickerVisible: false,
+            isFromTimePickerVisible: false,
+            isDeliveryDateTimePickerVisible: false,
         };
 
         //date
@@ -50,10 +51,12 @@ class OrderInfo extends Component {
     _hideOrderDatePicker() {this.setState({ isOrderDateTimePickerVisible: false }); };
 
     _handleOrderDatePicker(date) {
+        var tempDate = date.getDate() + "/" + parseInt(date.getMonth() + 1) + "/" + date.getFullYear();
         this.setState({
-            orderDate: date.getDate() + "/" + parseInt(date.getMonth() + 1) + "/" + date.getFullYear(),
+            orderDate: tempDate,
          });
 
+         this.props.getData.getOrderDate(tempDate);
         this.hideOrderDatePicker();
     }
 
@@ -62,9 +65,12 @@ class OrderInfo extends Component {
     _hideDeliveryDatePicker() { this.setState({ isDeliveryDateTimePickerVisible: false }); };
 
     _handleDeliveryDatePicker(date) {
+        var tempDate = date.getDate() + "/" + parseInt(date.getMonth() + 1) + "/" + date.getFullYear();
         this.setState({
-            deliveryDate: date.getDate() + "/" + parseInt(date.getMonth() + 1) + "/" + date.getFullYear(),
+            deliveryDate: tempDate,
          });
+
+         this.props.getData.getDeliveryDate(tempDate);
 
         this.hideDeliveryDatePicker();
     }
@@ -74,7 +80,9 @@ class OrderInfo extends Component {
     _hideFromTime() { this.setState({ isFromTimePickerVisible: false, }); }
 
     _handleFromTime(time) { 
-        this.setState({ fromTime: time.getHours() + ':' + time.getMinutes() });
+        var tempTime = time.getHours() + ':' + time.getMinutes();
+        this.setState({ fromTime: tempTime });
+        this.props.getData.getFromTime(tempTime)
         this.hideFromTime();
      }
 
@@ -83,11 +91,15 @@ class OrderInfo extends Component {
      _hideToTime() { this.setState({ isToTimePickerVisible: false }) }
 
      _handleToTime(time) {
-        this.setState({ toTime: time.getHours() + ':' + time.getMinutes() });
+        var tempTime = time.getHours() + ':' + time.getMinutes();
+        this.setState({ toTime: tempTime });
+
+        this.props.getData.getToTime(tempTime);
         this.hideToTime();
      }
 
     render() {
+        // this.props.objProps.getDataFromChild(this.state);
         return (
             <View>
                 <TouchableOpacity onPress={this.showOrderDatePicker}>
@@ -110,11 +122,17 @@ class OrderInfo extends Component {
                 />
                 <TextInput
                     placeholder="From Place"
-                    onChangeText={(fromPlace) => this.setState({ fromPlace })}
+                    onChangeText={(fromPlace) => {
+                        this.setState({ fromPlace });
+                        this.props.getData.getFromPlace(fromPlace)
+                    }}
                 />
                 <TextInput
                     placeholder="To Place"
-                    onChangeText={(toPlace) => this.setState({ toPlace })}
+                    onChangeText={(toPlace) => {
+                        this.setState({ toPlace });
+                        this.props.getData.getToPlace(toPlace)
+                    }}
                 />
                 <Text>Time</Text>
                 <TouchableOpacity onPress={this.showFromTime}>
@@ -138,7 +156,10 @@ class OrderInfo extends Component {
                 <TextInput
                     placeholder='Transportation Costs'
                     keyboardType='numeric'
-                    onChangeText={(transportationCosts) => this.setState({ transportationCosts })}
+                    onChangeText={(transportationCosts) => { 
+                        this.setState({ transportationCosts })
+                        this.props.getData.getTransportationCosts(transportationCosts)
+                    }}
                 />
                 <CheckBox
                     title='Paid'
@@ -152,12 +173,19 @@ class OrderInfo extends Component {
                     <TextInput
                     keyboardType='numeric'
                         placeholder='bail'
-                        onChangeText={(bail) => this.setState({ bail })}
+                        onChangeText={(bail) => {
+                            this.setState({ bail })
+                            this.props.getData.getBail(bail);
+                        }}
                     />
                 }
                 <TextInput
                     placeholder='Describe'
                     maxLength={60}
+                    onChangeText={(decribe) => {
+                        this.setState({ decribe })
+                        this.props.getData.getDecribe(decribe);
+                    }}
                 />
             </View >
         );
