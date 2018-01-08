@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, TouchableOpacity, TextInput } from 'react-native';
+import { View, Text, TouchableOpacity, TextInput, StyleSheet } from 'react-native';
 import DateTimePicker from 'react-native-modal-datetime-picker';
 import { CheckBox } from 'react-native-elements';
 
@@ -10,6 +10,8 @@ class OrderInfo extends Component {
         var today = new Date();
 
         this.state = {
+            nameProduct: '',
+            phoneNumber: '',
             orderDate: today.getDate() + "/" + parseInt(today.getMonth() + 1) + "/" + today.getFullYear(),
             deliveryDate: today.getDate() + "/" + parseInt(today.getMonth() + 1) + "/" + today.getFullYear(),
             fromPlace: '',
@@ -48,15 +50,15 @@ class OrderInfo extends Component {
 
     _showOrderDatePicker() { this.setState({ isOrderDateTimePickerVisible: true }); }
 
-    _hideOrderDatePicker() {this.setState({ isOrderDateTimePickerVisible: false }); };
+    _hideOrderDatePicker() { this.setState({ isOrderDateTimePickerVisible: false }); };
 
     _handleOrderDatePicker(date) {
         var tempDate = date.getDate() + "/" + parseInt(date.getMonth() + 1) + "/" + date.getFullYear();
         this.setState({
             orderDate: tempDate,
-         });
+        });
 
-         this.props.getData.getOrderDate(tempDate);
+        this.props.getData.getOrderDate(tempDate);
         this.hideOrderDatePicker();
     }
 
@@ -68,9 +70,9 @@ class OrderInfo extends Component {
         var tempDate = date.getDate() + "/" + parseInt(date.getMonth() + 1) + "/" + date.getFullYear();
         this.setState({
             deliveryDate: tempDate,
-         });
+        });
 
-         this.props.getData.getDeliveryDate(tempDate);
+        this.props.getData.getDeliveryDate(tempDate);
 
         this.hideDeliveryDatePicker();
     }
@@ -79,64 +81,94 @@ class OrderInfo extends Component {
 
     _hideFromTime() { this.setState({ isFromTimePickerVisible: false, }); }
 
-    _handleFromTime(time) { 
+    _handleFromTime(time) {
         var tempTime = time.getHours() + ':' + time.getMinutes();
         this.setState({ fromTime: tempTime });
         this.props.getData.getFromTime(tempTime)
         this.hideFromTime();
-     }
+    }
 
-     _showToTime() { this.setState({ isToTimePickerVisible: true }) }
+    _showToTime() { this.setState({ isToTimePickerVisible: true }) }
 
-     _hideToTime() { this.setState({ isToTimePickerVisible: false }) }
+    _hideToTime() { this.setState({ isToTimePickerVisible: false }) }
 
-     _handleToTime(time) {
+    _handleToTime(time) {
         var tempTime = time.getHours() + ':' + time.getMinutes();
         this.setState({ toTime: tempTime });
 
         this.props.getData.getToTime(tempTime);
         this.hideToTime();
-     }
+    }
 
     render() {
         // this.props.objProps.getDataFromChild(this.state);
         return (
             <View>
-                <TouchableOpacity onPress={this.showOrderDatePicker}>
-                    <Text>Date order</Text>
-                    <Text>{this.state.orderDate.toString()}</Text>
+                <Text style={styles.textLabel}>Product's Name</Text>
+                <TextInput
+                    style={styles.textInput}
+                    placeholder='Product Name'
+                    onChangeText={(nameProduct) => {
+                        this.setState({ nameProduct });
+                        this.props.getData.getNameProduct(nameProduct);
+                    }}
+                />
+                <Text style={styles.textLabel}>Phone Number</Text>
+                <TextInput
+                    style={styles.textInput}
+                    keyboardType='numeric'
+                    placeholder='Phone Number'
+                    onChangeText={(phoneNumber) => {
+                        this.setState({ phoneNumber });
+                        this.props.getData.getPhoneNumber(phoneNumber);
+                    }}
+                />
+                <TouchableOpacity 
+                style={ styles.btnTouchPicker }
+                onPress={this.showOrderDatePicker}>
+                    <Text style={styles.textButtonPicker}>Date order</Text>
+                    <Text style={styles.textButtonPicker && {color: '#B42323', fontWeight: 'bold',}}>{this.state.orderDate.toString()}</Text>
                 </TouchableOpacity>
                 <DateTimePicker
                     isVisible={this.state.isOrderDateTimePickerVisible}
                     onConfirm={this.handleOrderDatePicker}
                     onCancel={this.hideOrderDatePicker}
                 />
-                <TouchableOpacity onPress={this.showDeliveryDatePicker}>
-                    <Text>Date Date delivery</Text>
-                    <Text>{this.state.deliveryDate.toString()}</Text>
+                <TouchableOpacity
+                style={ styles.btnTouchPicker }
+                 onPress={this.showDeliveryDatePicker}>
+                    <Text style={styles.textButtonPicker}>Date delivery</Text>
+                    <Text style={styles.textButtonPicker && {color: '#B42323', fontWeight: 'bold',}}>{this.state.deliveryDate.toString()}</Text>
                 </TouchableOpacity>
                 <DateTimePicker
                     isVisible={this.state.isDeliveryDateTimePickerVisible}
                     onConfirm={this.handleDeliveryDatePicker}
                     onCancel={this.hideDeliveryDatePicker}
                 />
+                <Text style={styles.textLabel}>Place</Text>
                 <TextInput
+                    style={styles.textInput}
                     placeholder="From Place"
                     onChangeText={(fromPlace) => {
                         this.setState({ fromPlace });
                         this.props.getData.getFromPlace(fromPlace)
                     }}
                 />
+                <Text style={{margin: 5}}>To</Text>
                 <TextInput
+                    style={styles.textInput}
                     placeholder="To Place"
                     onChangeText={(toPlace) => {
                         this.setState({ toPlace });
                         this.props.getData.getToPlace(toPlace)
                     }}
                 />
-                <Text>Time</Text>
-                <TouchableOpacity onPress={this.showFromTime}>
-                    <Text>From: {this.state.fromTime}</Text>
+                <Text style={styles.textLabel}>Time</Text>
+                <View style={{ flex: 1, flexDirection: 'row', flexWrap:'wrap', justifyContent: 'space-between', alignItems: 'center' }}>
+                <TouchableOpacity 
+                style={styles.btnTouchTimePicker}
+                onPress={this.showFromTime}>
+                    <Text style={styles.textButtonPicker}>From: {this.state.fromTime}</Text>
                 </TouchableOpacity>
                 <DateTimePicker
                     mode='time'
@@ -144,8 +176,10 @@ class OrderInfo extends Component {
                     onConfirm={this.handleFromTime}
                     onCancel={this.hideFromTime}
                 />
-                <TouchableOpacity onPress={this.showToTime}>
-                    <Text>To: {this.state.toTime}</Text>
+                <TouchableOpacity 
+                style={styles.btnTouchTimePicker}
+                onPress={this.showToTime}>
+                    <Text style={styles.textButtonPicker}>To:{this.state.toTime}</Text>
                 </TouchableOpacity>
                 <DateTimePicker
                     mode='time'
@@ -153,10 +187,13 @@ class OrderInfo extends Component {
                     onConfirm={this.handleToTime}
                     onCancel={this.hideToTime}
                 />
+                </View>
+                <Text style={styles.textLabel}>Transportation Costs: </Text>
                 <TextInput
+                    style={styles.textInput}
                     placeholder='Transportation Costs'
                     keyboardType='numeric'
-                    onChangeText={(transportationCosts) => { 
+                    onChangeText={(transportationCosts) => {
                         this.setState({ transportationCosts })
                         this.props.getData.getTransportationCosts(transportationCosts)
                     }}
@@ -170,16 +207,22 @@ class OrderInfo extends Component {
                 />
                 {
                     this.state.isBail &&
-                    <TextInput
-                    keyboardType='numeric'
-                        placeholder='bail'
-                        onChangeText={(bail) => {
-                            this.setState({ bail })
-                            this.props.getData.getBail(bail);
-                        }}
-                    />
+                    <View>
+                        <Text style={styles.textLabel}>Bail</Text>
+                        <TextInput
+                            style={styles.textInput}
+                            keyboardType='numeric'
+                            placeholder='bail'
+                            onChangeText={(bail) => {
+                                this.setState({ bail })
+                                this.props.getData.getBail(bail);
+                            }}
+                        />
+                    </View>
                 }
+                <Text style={styles.textLabel}>Describe</Text>
                 <TextInput
+                    style={styles.textInput}
                     placeholder='Describe'
                     maxLength={60}
                     onChangeText={(decribe) => {
@@ -191,5 +234,41 @@ class OrderInfo extends Component {
         );
     }
 }
+
+const styles = StyleSheet.create({
+    container: {
+
+    },
+    textInput: {
+        fontSize: 15,
+        margin: 10,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    textLabel: {
+        fontSize: 25,
+        alignItems: 'center',
+        marginLeft: 5,
+    },
+    btnTouchPicker: {
+        height: 45,
+        backgroundColor: '#3580B8',
+        margin: 10,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    textButtonPicker: {
+        color: 'white',
+        fontSize: 15,
+    }, 
+    btnTouchTimePicker: {
+        height: 45,
+        width: 150,
+        backgroundColor: '#99BAEB',
+        margin: 20,
+        alignItems: 'center',
+        justifyContent: 'center',
+    }
+})
 
 export default OrderInfo;

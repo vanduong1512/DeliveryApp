@@ -5,24 +5,39 @@ import { DrawerNavigator } from 'react-navigation';
 
 import HomeDrawer from './screens/HomeScreen';
 import LeftPanel from './component/LeftPanel';
-import NewsDrawer from './screens/NewsScreen';
+import NewsDeliveryDrawer from './screens/NewsDelivery';
+import { Text } from 'react-native';
 
 const DrawerNavigation = DrawerNavigator({
-    HomeDrawer: { 
-        screen: HomeDrawer, 
-    navigationOptions: ({navigation}) => ({
-        title: 'Home Screen',
-        headerLeft: (
-            <TouchableOpacity
-                onPress={() => navigation.navigate('DrawerOpen')}
-            >
-                <Icon name="bars" size={30}/>
-            </TouchableOpacity>
-        ),
-    })
-},
-    NewsDrawer: { screen: NewsDrawer },
-    
+    HomeDrawer: {
+        screen: HomeDrawer,
+        navigationOptions: ({ navigation }) => ({
+            title: 'Home Screen',
+            headerLeft: (
+                <TouchableOpacity
+                    style={{ margin: 10 }}
+                    onPress={() => navigation.navigate('DrawerOpen')}
+                >
+                    <Icon name="bars" size={30} />
+                </TouchableOpacity>
+            ),
+        })
+    },
+    NewsDeliveryDrawer: {
+        screen: NewsDeliveryDrawer,
+        navigationOptions: ({ navigation }) => ({
+            title: 'News Delivery',
+            drawerLabel: 'News Delivery',
+            headerLeft: (
+                <TouchableOpacity
+                    style={{ margin: 10 }}
+                    onPress={() => navigation.navigate('DrawerOpen')}
+                >
+                    <Icon name="bars" size={30} />
+                </TouchableOpacity>
+            ),
+        })
+    },
     LeftPanel: { screen: LeftPanel },
 });
 

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, TouchableHighlight } from 'react-native';
+import { View, Text, TouchableHighlight, StyleSheet } from 'react-native';
 
 class OnSubmit extends Component {
     constructor(props) {
@@ -14,16 +14,36 @@ class OnSubmit extends Component {
 
     render() {
         return(
-            <View>
-                <TouchableHighlight onPress={this.onSubmit}>
-                    <Text>Submit</Text>
+            <View style={styles.container}>
+                <TouchableHighlight style={styles.btnTouch} onPress={this.onSubmit}>
+                    <Text style={styles.textButton}>Submit</Text>
                 </TouchableHighlight>
-                <TouchableHighlight>
-                    <Text>Cancel</Text>
+                <TouchableHighlight style={styles.btnTouch}>
+                    <Text style={styles.textButton}>Cancel</Text>
                 </TouchableHighlight>
             </View>
         );
     }
 }
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        justifyContent: 'space-between',
+        flexDirection: 'row',
+    },
+    btnTouch: {
+        backgroundColor: '#A21E1A',
+        width: 180,
+        height: 50,
+        margin: 15,
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    textButton: {
+        color: 'white',
+        fontWeight: 'bold',
+    },
+})
 
 export default OnSubmit;
