@@ -1,6 +1,6 @@
 import { StackNavigator, NavigationActions } from 'react-navigation';
 
-import {Text} from 'react-native';
+import { Text } from 'react-native';
 
 import LoginScreen from './screens/LoginScreen';
 import DrawerNavigation from './DrawerNavigator';
@@ -11,8 +11,8 @@ import OrderInfo from './component/OrderInfo';
 
 const navigation = StackNavigator(
     {
-        LoginScreen: { screen: LoginScreen },
         HomeScreen: { screen: DrawerNavigation },
+        LoginScreen: { screen: LoginScreen },
         OrderFlower: { screen: OrderFlower },
     }
 );

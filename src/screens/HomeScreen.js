@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
-import { View, Text, Image, StyleSheet, TouchableHighlight } from 'react-native';
+import {
+    View, Text, Image, TouchableHighlight, StyleSheet,
+    ScrollView
+} from 'react-native';
+import { List } from 'react-native-elements'
 import { DrawerNavigator, StackNavigator } from 'react-navigation';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
@@ -11,29 +15,36 @@ class HomeScreen extends Component {
         super(props);
     }
 
-    static navigationOptions = {
-        title: HomeScreen,
-        drawerLabel: 'Home',
-        headerLeft:
-            <TouchableHighlight onPress={() => this.props.navigation.navigate('DrawerOpen')}>
-                <Icon name="bars" size={30} color="#900" />
-            </TouchableHighlight>,
-    }
-
     render() {
         var { navigate } = this.props.navigation;
         return (
-            <View>
-                <View>
-                    {
-                        LoadProductIcon.map(products => {
-                            return <LoadProduct objParent={{ products, navigate }} key={products.key} />
-                        })
-                    }
+            <View style={styles.container}>
+                <View style={styles.containerProduct}>
+                    <ScrollView>
+                        <List>
+                            {
+                                LoadProductIcon.map(products => {
+                                    return <LoadProduct objParent={{ products, navigate }} key={products.key} />
+                                })
+                            }
+                        </List>
+                    </ScrollView>
                 </View>
             </View>
         );
     };
 }
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+    },
+    containerProduct: {
+        flex: 1,
+        flexDirection: 'column',
+
+
+    }
+});
 
 export default HomeScreen;
