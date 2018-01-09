@@ -6,7 +6,7 @@ class OnEdit extends Component {
         super(props);
 
         this.onEdit = this._onEdit.bind(this);
-        this.onCancel = this._onCancel;
+        this.onCancel = this._onCancel.bind(this);
     }
 
     _onCancel() {
@@ -15,7 +15,7 @@ class OnEdit extends Component {
             'Are you sure?',
             [
                 { text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel' },
-                { text: 'OK', onPress: () => {this.props.navigateHomeScreen()} },
+                { text: 'OK', onPress: () => {this.props.onEdit.navigateHomeScreen()} },
             ],
             { cancelable: false }
         )

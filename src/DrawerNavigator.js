@@ -42,7 +42,7 @@ const DrawerNavigation = DrawerNavigator({
     MyOrder: {
         screen: MyOrder,
         navigationOptions: ({ navigation }) => ({
-            title: 'My Order',
+            title: 'News Delivery',
             drawerLabel: 'News Delivery',
             headerLeft: (
                 <TouchableOpacity

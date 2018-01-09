@@ -14,10 +14,10 @@ import EditOrderFlower from './screens/EditOrderFlower';
 import MyOrder from './screens/MyOrder';
 const navigation = StackNavigator(
     {
-        EditOrderFlower: { screen: EditOrderFlower },
-        // OrderFlower: { screen: OrderFlower },
         // MyOrder: { screen: MyOrder },
         HomeScreen: { screen: DrawerNavigation },
+        OrderFlower: { screen: OrderFlower },
+        EditOrderFlower: { screen: EditOrderFlower },
         LoginScreen: { screen: LoginScreen },
         RegisterScreen:{screen:RegisterScreen},
     }

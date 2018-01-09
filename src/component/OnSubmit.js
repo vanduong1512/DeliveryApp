@@ -1,15 +1,28 @@
 import React, { Component } from 'react';
-import { View, Text, TouchableHighlight, StyleSheet } from 'react-native';
+import { View, Text, TouchableHighlight, StyleSheet, Alert } from 'react-native';
 
 class OnSubmit extends Component {
     constructor(props) {
         super(props);
     
         this.onSubmit = this._onSubmit.bind(this);
+        this.onCancel = this._onCancel.bind(this);
     }
 
     _onSubmit() {
-        this.props.onSubmit();
+        this.props.onSubmit.onSubmit();
+    }
+
+    _onCancel() {
+        Alert.alert(
+            'Notification',
+            'Are you sure?',
+            [
+                { text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel' },
+                { text: 'OK', onPress: () => {this.props.onSubmit.navigateHomeScreen()} },
+            ],
+            { cancelable: false }
+        )
     }
 
     render() {
@@ -18,7 +31,7 @@ class OnSubmit extends Component {
                 <TouchableHighlight style={styles.btnTouch} onPress={this.onSubmit}>
                     <Text style={styles.textButton}>Submit</Text>
                 </TouchableHighlight>
-                <TouchableHighlight style={styles.btnTouch}>
+                <TouchableHighlight style={styles.btnTouch} onPress={this.onCancel}>
                     <Text style={styles.textButton}>Cancel</Text>
                 </TouchableHighlight>
             </View>

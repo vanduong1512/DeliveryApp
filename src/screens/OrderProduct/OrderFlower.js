@@ -48,6 +48,12 @@ class OrderFlower extends Component {
         this.getTransportationCosts = this._getTransportationCostsFromChild.bind(this);
         this.getBail = this._getBailFromChild.bind(this);
         this.getDecribe = this._getDecribeFromChild.bind(this);
+
+        this.navigateHomeScreen = this._navigateHomeScreen.bind(this);
+    }
+
+    _navigateHomeScreen(){
+        this.props.navigation.navigate('HomeScreen');
     }
 
     // _getDataFromChild(childState) {
@@ -181,7 +187,7 @@ class OrderFlower extends Component {
                         checked={this.state.isUgent}
                         onPress={() => this.setState((prev, props) => ({ isUgent: !prev.isUgent }))}
                     />
-                    <OnSubmit onSubmit={this.onSubmit} />
+                    <OnSubmit onSubmit={{onSubmit: this.onSubmit, navigateHomeScreen: this.navigateHomeScreen}} />
                 </View>
             </ScrollView>
         );
