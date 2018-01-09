@@ -15,8 +15,8 @@ class DescribeNewsDelivery extends Component {
                             <Text style={styles.textDate}>Delivery date: {item.deliveryDate}</Text>
                         </View>
                         <Text style={styles.title}>Place:</Text>
-                        <Text>From Place: {item.fromPlace}</Text>
-                        <Text>To Place: {item.toPlace}</Text>
+                        <Text style={styles.textPlace}>From Place: {item.fromPlace}</Text>
+                        <Text style={styles.textPlace}>To Place: {item.toPlace}</Text>
                         <Text style={styles.title}>Time:</Text>
                         <View style={styles.containerDateTime}>
                             <Text style={styles.textTime}>From: {item.fromTime}</Text>
@@ -49,6 +49,7 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'space-between',
         flexDirection: 'row',
+        marginLeft: 10,
     },
     textTime: {
         fontSize: 15,
@@ -58,7 +59,8 @@ const styles = StyleSheet.create({
         fontSize: 15,        
     },
     textPlace: {
-        fontSize: 15
+        fontSize: 15,
+        marginLeft: 10,
     },
     title: {
         fontSize: 20,
@@ -68,6 +70,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#A21E1A',
         width: 100,
         height: 50,
+        marginLeft: 10,
         marginTop: 15,
         marginBottom: 15,
         alignItems: 'center',

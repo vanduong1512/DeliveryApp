@@ -23,7 +23,7 @@ class OrderInfo extends Component {
             decribe: '',
 
             isOrderDateTimePickerVisible: false,
-            isBail: false,
+            isBail: this.props.getData.data.isBail,
             isToTimePickerVisible: false,
             isFromTimePickerVisible: false,
             isDeliveryDateTimePickerVisible: false,
@@ -107,6 +107,7 @@ class OrderInfo extends Component {
                 <Text style={styles.textLabel}>Product's Name</Text>
                 <TextInput
                     style={styles.textInput}
+                    value={this.props.getData.data.nameProduct}
                     placeholder='Product Name'
                     onChangeText={(nameProduct) => {
                         this.setState({ nameProduct });
@@ -116,6 +117,7 @@ class OrderInfo extends Component {
                 <Text style={styles.textLabel}>Phone Number</Text>
                 <TextInput
                     style={styles.textInput}
+                    value={this.props.getData.data.phoneNumber}
                     keyboardType='numeric'
                     placeholder='Phone Number'
                     onChangeText={(phoneNumber) => {
@@ -148,6 +150,7 @@ class OrderInfo extends Component {
                 <Text style={styles.textLabel}>Place</Text>
                 <TextInput
                     style={styles.textInput}
+                    value={this.props.getData.data.fromPlace}
                     placeholder="From Place"
                     onChangeText={(fromPlace) => {
                         this.setState({ fromPlace });
@@ -157,6 +160,7 @@ class OrderInfo extends Component {
                 <Text style={{margin: 5}}>To</Text>
                 <TextInput
                     style={styles.textInput}
+                    value={this.props.getData.data.toPlace}
                     placeholder="To Place"
                     onChangeText={(toPlace) => {
                         this.setState({ toPlace });
@@ -191,6 +195,7 @@ class OrderInfo extends Component {
                 <Text style={styles.textLabel}>Transportation Costs: </Text>
                 <TextInput
                     style={styles.textInput}
+                    value={this.props.getData.data.transportationCosts.toString()}
                     placeholder='Transportation Costs'
                     keyboardType='numeric'
                     onChangeText={(transportationCosts) => {
@@ -211,6 +216,7 @@ class OrderInfo extends Component {
                         <Text style={styles.textLabel}>Bail</Text>
                         <TextInput
                             style={styles.textInput}
+                            value={this.props.getData.data.bail.toString()}
                             keyboardType='numeric'
                             placeholder='bail'
                             onChangeText={(bail) => {
@@ -223,6 +229,7 @@ class OrderInfo extends Component {
                 <Text style={styles.textLabel}>Describe</Text>
                 <TextInput
                     style={styles.textInput}
+                    value={this.props.getData.data.decribe}
                     placeholder='Describe'
                     maxLength={60}
                     onChangeText={(decribe) => {

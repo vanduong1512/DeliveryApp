@@ -62,6 +62,7 @@ const styles = StyleSheet.create({
     textTime: {
         fontSize: 18,
         width: 150,
+        marginBottom: 10,
     },
     textDate: {
         fontSize: 18,
